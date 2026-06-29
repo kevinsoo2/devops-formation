@@ -4,10 +4,13 @@ import { useEffect, useState } from "react";
 
 export default function DarkModeToggle() {
   const [dark, setDark] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const stored = localStorage.getItem("darkMode");
-    const isDark = stored === "true" || (!stored && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    // Default to light mode unless explicitly set to dark
+    const isDark = stored === "true";
     setDark(isDark);
     document.documentElement.classList.toggle("dark", isDark);
   }, []);
@@ -18,6 +21,8 @@ export default function DarkModeToggle() {
     localStorage.setItem("darkMode", String(newDark));
     document.documentElement.classList.toggle("dark", newDark);
   };
+
+  if (!mounted) return null;
 
   return (
     <button onClick={toggle} className="p-2 rounded-lg hover:bg-gray-700 transition-colors" aria-label="Toggle dark mode" title={dark ? "Mode clair" : "Mode sombre"}>

@@ -24,7 +24,22 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Syntax highlighting for code blocks */
+/* Fix prose text colors for light mode */
+.prose {
+  --tw-prose-body: #374151;
+  --tw-prose-headings: #111827;
+  --tw-prose-bold: #111827;
+  --tw-prose-bullets: #6b7280;
+}
+
+.dark .prose {
+  --tw-prose-body: #e5e7eb;
+  --tw-prose-headings: #f9fafb;
+  --tw-prose-bold: #f9fafb;
+  --tw-prose-bullets: #9ca3af;
+}
+
+/* Ensure code blocks are always readable */
 pre {
   overflow-x: auto;
 }
@@ -32,4 +47,29 @@ pre {
 pre code {
   font-size: 0.875rem;
   line-height: 1.5;
+}
+
+/* Table styles */
+.prose table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.prose th,
+.prose td {
+  padding: 0.75rem;
+  border: 1px solid #e5e7eb;
+}
+
+.dark .prose th,
+.dark .prose td {
+  border-color: #374151;
+}
+
+.prose th {
+  background-color: #f3f4f6;
+}
+
+.dark .prose th {
+  background-color: #1f2937;
 }

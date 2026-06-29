@@ -15,16 +15,25 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_FR",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "DevOps Formation",
-    description: "Apprenez le DevOps gratuitement avec des cours structurés.",
-  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="fr" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var dark = localStorage.getItem('darkMode') === 'true';
+                  if (dark) document.documentElement.classList.add('dark');
+                } catch(e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className={`${inter.className} flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors`}>
         <Navbar />
         <main className="flex-1">{children}</main>
