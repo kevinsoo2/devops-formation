@@ -14,6 +14,8 @@ import TextToSpeech from "@/components/TextToSpeech";
 import ShareButtons from "@/components/ShareButtons";
 import Notes from "@/components/Notes";
 import ExamMode from "@/components/ExamMode";
+import FocusMode from "@/components/FocusMode";
+import ExportPDF from "@/components/ExportPDF";
 
 export function generateStaticParams() {
   const params: { courseSlug: string; lessonSlug: string }[] = [];
@@ -72,7 +74,9 @@ export default async function LessonPage({ params }: { params: Promise<{ courseS
               <p className="text-lg text-gray-600 dark:text-gray-300 mt-2">{lesson.description}</p>
             </div>
             <div className="flex items-center gap-2">
+              <FocusMode />
               <TextToSpeech />
+              <ExportPDF title={lesson.title} />
               <FavoriteButton courseSlug={courseSlug} lessonSlug={lessonSlug} lessonTitle={lesson.title} />
               <ProgressTracker courseSlug={courseSlug} lessonSlug={lessonSlug} />
             </div>
