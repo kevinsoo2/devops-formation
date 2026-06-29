@@ -1,3 +1,8 @@
+import { ansibleInstallation, ansiblePlaybooks, ansibleModules, ansibleRoles, ansibleVault } from "./ansible-lessons";
+import { k8sPods, k8sDeployments, k8sNetworking, k8sStorage, k8sHelm } from "./kubernetes-lessons";
+import { rhelFilesystem, rhelServices, rhelNetworking, rhelStorage, rhelSecurity } from "./redhat-lessons";
+import { dockerIntro, dockerInstallation, dockerImages, dockerCompose, dockerNetworking, dockerSecurity } from "./docker-lessons";
+
 export interface LessonContent {
   courseSlug: string;
   lessonSlug: string;
@@ -18,7 +23,7 @@ Ansible est un outil d'automatisation open-source développé par Red Hat. Il pe
 
 \`\`\`
 ┌─────────────────┐
-│  Control Node   │  ← Machine depuis laquelle vous lancez Ansible
+│  Control Node   │  ← Votre machine
 └───────┬─────────┘
         │ SSH
         ├────────────┐────────────┐
@@ -30,7 +35,7 @@ Ansible est un outil d'automatisation open-source développé par Red Hat. Il pe
 
 ## Concepts fondamentaux
 
-### 1. Inventaire (Inventory)
+### 1. Inventaire
 \`\`\`ini
 [webservers]
 web1.example.com
@@ -38,17 +43,13 @@ web2.example.com
 
 [databases]
 db1.example.com
-
-[all:vars]
-ansible_user=admin
 \`\`\`
 
 ### 2. Modules
-Les modules sont les "outils" d'Ansible :
 - \`apt\` / \`yum\` : installer des paquets
 - \`copy\` : copier des fichiers
 - \`service\` : gérer des services
-- \`template\` : déployer des fichiers avec des variables
+- \`template\` : templates Jinja2
 
 ### 3. Playbooks
 \`\`\`yaml
@@ -72,17 +73,17 @@ Les modules sont les "outils" d'Ansible :
 
 | Avantage | Description |
 |----------|-------------|
-| **Agentless** | Pas besoin d'agent sur les machines cibles |
-| **SSH** | Utilise SSH, déjà présent sur les serveurs |
+| **Agentless** | Pas d'agent sur les machines cibles |
+| **SSH** | Utilise SSH natif |
 | **YAML** | Syntaxe simple et lisible |
 | **Idempotent** | Peut être relancé sans risque |
 
 ## Exercice pratique
 
-> **Exercice** : Vérifiez que vous pouvez vous connecter en SSH à une machine distante.
+> **Exercice** : Testez la connexion SSH à une machine.
 
 \`\`\`bash
-ssh user@votre-serveur "echo 'Connexion réussie !'"
+ssh user@serveur "echo 'Connexion réussie !'"
 \`\`\`
 `;
 
@@ -90,32 +91,30 @@ const k8sIntro = `# Introduction à Kubernetes
 
 ## Qu'est-ce que Kubernetes ?
 
-Kubernetes (K8s) est une plateforme d'orchestration de conteneurs open-source développée par Google.
+Kubernetes (K8s) est une plateforme d'orchestration de conteneurs développée par Google.
 
 - **Déployer** des applications conteneurisées
 - **Scaler** automatiquement selon la charge
 - **Guérir** automatiquement les applications en panne
 
-## Architecture de Kubernetes
-
-### Composants du Control Plane
+## Composants du Control Plane
 
 | Composant | Rôle |
 |-----------|------|
-| **API Server** | Point d'entrée de toutes les requêtes |
-| **etcd** | Base de données clé-valeur (état du cluster) |
-| **Scheduler** | Décide sur quel noeud placer un Pod |
+| **API Server** | Point d'entrée des requêtes |
+| **etcd** | Base de données clé-valeur |
+| **Scheduler** | Place les Pods sur les noeuds |
 | **Controller Manager** | Maintient l'état souhaité |
 
-### Composants des Noeuds
+## Composants des Noeuds
 
 | Composant | Rôle |
 |-----------|------|
-| **kubelet** | Agent qui gère les Pods sur le noeud |
-| **kube-proxy** | Gère le réseau et le load balancing |
-| **Container Runtime** | Exécute les conteneurs (containerd, CRI-O) |
+| **kubelet** | Gère les Pods sur le noeud |
+| **kube-proxy** | Réseau et load balancing |
+| **Container Runtime** | Exécute les conteneurs |
 
-## Objets Kubernetes essentiels
+## Objets essentiels
 
 ### Pod
 \`\`\`yaml
@@ -152,21 +151,6 @@ spec:
           image: nginx:latest
 \`\`\`
 
-### Service
-\`\`\`yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: mon-app-service
-spec:
-  selector:
-    app: mon-app
-  ports:
-    - port: 80
-      targetPort: 80
-  type: LoadBalancer
-\`\`\`
-
 ## Commandes kubectl essentielles
 
 \`\`\`bash
@@ -180,35 +164,34 @@ kubectl scale deployment mon-app --replicas=5
 
 ## Exercice pratique
 
-> **Exercice** : Utilisez [Killercoda](https://killercoda.com) pour lancer un cluster K8s gratuit et déployer votre premier Pod.
+> **Exercice** : Utilisez [Killercoda](https://killercoda.com) pour déployer votre premier Pod.
 `;
 
 const rhelIntro = `# Introduction à Red Hat Enterprise Linux
 
 ## Qu'est-ce que RHEL ?
 
-Red Hat Enterprise Linux (RHEL) est la distribution Linux la plus utilisée en entreprise.
+Red Hat Enterprise Linux est la distribution Linux de référence en entreprise.
 
-- **Stabilité** : cycles de support de 10 ans
-- **Sécurité** : certifications (Common Criteria, FIPS)
+- **Stabilité** : support de 10 ans
+- **Sécurité** : certifications FIPS
 - **Support** : support professionnel Red Hat
 
 ## Certifications Red Hat
 
 | Certification | Niveau | Description |
 |---------------|--------|-------------|
-| **RHCSA** | Fondamental | Administration système de base |
-| **RHCE** | Avancé | Automatisation avec Ansible |
-| **RHCA** | Expert | Spécialisations multiples |
+| **RHCSA** | Fondamental | Administration système |
+| **RHCE** | Avancé | Automatisation Ansible |
+| **RHCA** | Expert | Spécialisations |
 
 ## Commandes de base
 
-### Gestion des paquets (dnf)
+### Gestion des paquets
 \`\`\`bash
 dnf search httpd
 sudo dnf install httpd -y
 sudo dnf update -y
-dnf list installed
 \`\`\`
 
 ### Gestion des utilisateurs
@@ -218,43 +201,64 @@ sudo passwd devops
 sudo usermod -aG wheel devops
 \`\`\`
 
-### Gestion des services (systemd)
+### Gestion des services
 \`\`\`bash
 sudo systemctl start httpd
 sudo systemctl enable httpd
 systemctl status httpd
-systemctl list-units --type=service
 \`\`\`
 
 ## Arborescence Linux
 
 \`\`\`
 /
-├── /etc/        → Configuration système
-├── /var/        → Données variables (logs)
-├── /home/       → Répertoires utilisateurs
-├── /opt/        → Logiciels tiers
-├── /tmp/        → Fichiers temporaires
-├── /usr/        → Programmes et bibliothèques
-└── /proc/       → Système de fichiers virtuel
+├── /etc/    → Configuration
+├── /var/    → Données variables
+├── /home/   → Utilisateurs
+├── /opt/    → Logiciels tiers
+├── /tmp/    → Fichiers temporaires
+└── /usr/    → Programmes
 \`\`\`
 
 ## Exercice pratique
 
-> **Exercice** : Sur un système Linux, créez un utilisateur et installez vim.
+> **Exercice** : Créez un utilisateur et installez vim.
 
 \`\`\`bash
 sudo useradd -m formation
 sudo dnf install vim -y
-sudo mkdir -p /opt/formation
-echo "DevOps Ready!" | sudo tee /opt/formation/hello.txt
 \`\`\`
 `;
 
 export const lessonsContent: LessonContent[] = [
+  // Ansible
   { courseSlug: "ansible", lessonSlug: "introduction", content: ansibleIntro },
+  { courseSlug: "ansible", lessonSlug: "installation", content: ansibleInstallation },
+  { courseSlug: "ansible", lessonSlug: "playbooks", content: ansiblePlaybooks },
+  { courseSlug: "ansible", lessonSlug: "modules", content: ansibleModules },
+  { courseSlug: "ansible", lessonSlug: "roles", content: ansibleRoles },
+  { courseSlug: "ansible", lessonSlug: "vault", content: ansibleVault },
+  // Kubernetes
   { courseSlug: "kubernetes", lessonSlug: "introduction", content: k8sIntro },
+  { courseSlug: "kubernetes", lessonSlug: "pods", content: k8sPods },
+  { courseSlug: "kubernetes", lessonSlug: "deployments", content: k8sDeployments },
+  { courseSlug: "kubernetes", lessonSlug: "networking", content: k8sNetworking },
+  { courseSlug: "kubernetes", lessonSlug: "storage", content: k8sStorage },
+  { courseSlug: "kubernetes", lessonSlug: "helm", content: k8sHelm },
+  // Red Hat
   { courseSlug: "redhat", lessonSlug: "introduction", content: rhelIntro },
+  { courseSlug: "redhat", lessonSlug: "filesystem", content: rhelFilesystem },
+  { courseSlug: "redhat", lessonSlug: "services", content: rhelServices },
+  { courseSlug: "redhat", lessonSlug: "networking", content: rhelNetworking },
+  { courseSlug: "redhat", lessonSlug: "storage", content: rhelStorage },
+  { courseSlug: "redhat", lessonSlug: "security", content: rhelSecurity },
+  // Docker
+  { courseSlug: "docker", lessonSlug: "introduction", content: dockerIntro },
+  { courseSlug: "docker", lessonSlug: "installation", content: dockerInstallation },
+  { courseSlug: "docker", lessonSlug: "images", content: dockerImages },
+  { courseSlug: "docker", lessonSlug: "compose", content: dockerCompose },
+  { courseSlug: "docker", lessonSlug: "networking", content: dockerNetworking },
+  { courseSlug: "docker", lessonSlug: "security", content: dockerSecurity },
 ];
 
 export function getLessonContent(courseSlug: string, lessonSlug: string): LessonContent | undefined {

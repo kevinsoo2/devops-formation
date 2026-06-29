@@ -66,6 +66,22 @@ export const courses: Course[] = [
       { id: "rhel-security", title: "SELinux & Sécurité", description: "Maîtrisez SELinux, les contexts et les politiques de sécurité.", level: "avance", duration: "60 min", slug: "security" },
     ],
   },
+  {
+    id: "docker",
+    title: "Docker",
+    description: "Maîtrisez la conteneurisation avec Docker. Du Dockerfile au déploiement en production.",
+    icon: "🐳",
+    color: "from-sky-500 to-sky-700",
+    slug: "docker",
+    lessons: [
+      { id: "docker-intro", title: "Introduction à Docker", description: "Découvrez la conteneurisation, l'architecture Docker et ses concepts.", level: "debutant", duration: "35 min", slug: "introduction" },
+      { id: "docker-installation", title: "Installation de Docker", description: "Installez Docker, découvrez Podman et les premières commandes.", level: "debutant", duration: "30 min", slug: "installation" },
+      { id: "docker-images", title: "Images & Dockerfile", description: "Écrivez des Dockerfiles, builds multi-étapes et optimisation.", level: "debutant", duration: "50 min", slug: "images" },
+      { id: "docker-compose", title: "Docker Compose", description: "Gérez des applications multi-conteneurs avec Compose.", level: "intermediaire", duration: "45 min", slug: "compose" },
+      { id: "docker-networking", title: "Réseau & Volumes", description: "Réseaux Docker, volumes et persistance des données.", level: "intermediaire", duration: "40 min", slug: "networking" },
+      { id: "docker-security", title: "Sécurité & Production", description: "Sécurisez vos conteneurs, CI/CD et registries.", level: "avance", duration: "55 min", slug: "security" },
+    ],
+  },
 ];
 
 export function getCourse(slug: string): Course | undefined {

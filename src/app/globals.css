@@ -1,9 +1,16 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #f9fafb;
   --foreground: #171717;
+}
+
+.dark {
+  --background: #111827;
+  --foreground: #f3f4f6;
 }
 
 @theme inline {
@@ -14,4 +21,15 @@
 body {
   background: var(--background);
   color: var(--foreground);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Syntax highlighting for code blocks */
+pre {
+  overflow-x: auto;
+}
+
+pre code {
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
