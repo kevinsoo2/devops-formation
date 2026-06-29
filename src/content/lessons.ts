@@ -3,6 +3,10 @@ import { k8sPods, k8sDeployments, k8sNetworking, k8sStorage, k8sHelm } from "./k
 import { rhelFilesystem, rhelServices, rhelNetworking, rhelStorage, rhelSecurity } from "./redhat-lessons";
 import { dockerIntro, dockerInstallation, dockerImages, dockerCompose, dockerNetworking, dockerSecurity } from "./docker-lessons";
 import { terraformIntro, terraformInstallation, terraformResources, terraformVariables, terraformModules, terraformState } from "./terraform-lessons";
+import { cicdIntro, cicdGithubActions, cicdGitlabCI, cicdJenkins, cicdDocker, cicdBestPractices } from "./cicd-lessons";
+import { prometheusIntro, prometheusInstallation, prometheusMetrics, prometheusAlerting, grafanaIntro, grafanaDashboards } from "./prometheus-lessons";
+import { gitopsIntro, gitopsArgocdInstall, gitopsArgocdApps, gitopsRepoStructure, gitopsSecrets, gitopsAdvanced } from "./gitops-lessons";
+import { linuxScripting, linuxTextProcessing, linuxProcesses, linuxCron, linuxPerformance, linuxTroubleshooting } from "./linux-lessons";
 
 export interface LessonContent {
   courseSlug: string;
@@ -267,6 +271,34 @@ export const lessonsContent: LessonContent[] = [
   { courseSlug: "terraform", lessonSlug: "variables", content: terraformVariables },
   { courseSlug: "terraform", lessonSlug: "modules", content: terraformModules },
   { courseSlug: "terraform", lessonSlug: "state", content: terraformState },
+  // CI/CD
+  { courseSlug: "cicd", lessonSlug: "introduction", content: cicdIntro },
+  { courseSlug: "cicd", lessonSlug: "github-actions", content: cicdGithubActions },
+  { courseSlug: "cicd", lessonSlug: "gitlab-ci", content: cicdGitlabCI },
+  { courseSlug: "cicd", lessonSlug: "jenkins", content: cicdJenkins },
+  { courseSlug: "cicd", lessonSlug: "docker", content: cicdDocker },
+  { courseSlug: "cicd", lessonSlug: "best-practices", content: cicdBestPractices },
+  // Prometheus & Grafana
+  { courseSlug: "prometheus", lessonSlug: "introduction", content: prometheusIntro },
+  { courseSlug: "prometheus", lessonSlug: "installation", content: prometheusInstallation },
+  { courseSlug: "prometheus", lessonSlug: "metrics", content: prometheusMetrics },
+  { courseSlug: "prometheus", lessonSlug: "alerting", content: prometheusAlerting },
+  { courseSlug: "prometheus", lessonSlug: "grafana", content: grafanaIntro },
+  { courseSlug: "prometheus", lessonSlug: "dashboards", content: grafanaDashboards },
+  // GitOps
+  { courseSlug: "gitops", lessonSlug: "introduction", content: gitopsIntro },
+  { courseSlug: "gitops", lessonSlug: "argocd-install", content: gitopsArgocdInstall },
+  { courseSlug: "gitops", lessonSlug: "argocd-apps", content: gitopsArgocdApps },
+  { courseSlug: "gitops", lessonSlug: "repo-structure", content: gitopsRepoStructure },
+  { courseSlug: "gitops", lessonSlug: "secrets", content: gitopsSecrets },
+  { courseSlug: "gitops", lessonSlug: "advanced", content: gitopsAdvanced },
+  // Linux Avancé
+  { courseSlug: "linux", lessonSlug: "scripting", content: linuxScripting },
+  { courseSlug: "linux", lessonSlug: "text-processing", content: linuxTextProcessing },
+  { courseSlug: "linux", lessonSlug: "processes", content: linuxProcesses },
+  { courseSlug: "linux", lessonSlug: "cron", content: linuxCron },
+  { courseSlug: "linux", lessonSlug: "performance", content: linuxPerformance },
+  { courseSlug: "linux", lessonSlug: "troubleshooting", content: linuxTroubleshooting },
 ];
 
 export function getLessonContent(courseSlug: string, lessonSlug: string): LessonContent | undefined {
