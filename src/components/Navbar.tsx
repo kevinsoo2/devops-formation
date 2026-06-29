@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import SearchBar from "./SearchBar";
 import DarkModeToggle from "./DarkModeToggle";
+import AuthButton from "./AuthButton";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,6 +21,7 @@ export default function Navbar() {
             <Link href="/cours" className="hover:text-blue-400 transition-colors">Cours</Link>
             <Link href="/a-propos" className="hover:text-blue-400 transition-colors">À propos</Link>
             <DarkModeToggle />
+            <AuthButton />
           </div>
           <div className="flex md:hidden items-center gap-2">
             <DarkModeToggle />
@@ -36,6 +38,7 @@ export default function Navbar() {
           <Link href="/" className="block py-2 hover:text-blue-400" onClick={() => setIsOpen(false)}>Accueil</Link>
           <Link href="/cours" className="block py-2 hover:text-blue-400" onClick={() => setIsOpen(false)}>Cours</Link>
           <Link href="/a-propos" className="block py-2 hover:text-blue-400" onClick={() => setIsOpen(false)}>À propos</Link>
+          <div className="pt-2"><AuthButton /></div>
         </div>
       )}
     </nav>
