@@ -82,6 +82,22 @@ export const courses: Course[] = [
       { id: "docker-security", title: "Sécurité & Production", description: "Sécurisez vos conteneurs, CI/CD et registries.", level: "avance", duration: "55 min", slug: "security" },
     ],
   },
+  {
+    id: "terraform",
+    title: "Terraform",
+    description: "Gérez votre infrastructure as code avec Terraform. Des premiers pas aux modules avancés.",
+    icon: "🏗️",
+    color: "from-purple-500 to-purple-700",
+    slug: "terraform",
+    lessons: [
+      { id: "tf-intro", title: "Introduction à Terraform", description: "Découvrez l'Infrastructure as Code et les concepts de Terraform.", level: "debutant", duration: "30 min", slug: "introduction" },
+      { id: "tf-install", title: "Installation et premiers pas", description: "Installez Terraform et créez votre première ressource.", level: "debutant", duration: "35 min", slug: "installation" },
+      { id: "tf-resources", title: "Ressources et Data Sources", description: "Gérez des ressources cloud et exploitez les data sources.", level: "debutant", duration: "45 min", slug: "resources" },
+      { id: "tf-variables", title: "Variables et Outputs", description: "Paramétrez vos configurations avec les variables et outputs.", level: "intermediaire", duration: "40 min", slug: "variables" },
+      { id: "tf-modules", title: "Modules Terraform", description: "Structurez et réutilisez votre code avec les modules.", level: "intermediaire", duration: "50 min", slug: "modules" },
+      { id: "tf-state", title: "State et Workspaces", description: "Gérez le state distant, les workspaces et l'import de ressources.", level: "avance", duration: "55 min", slug: "state" },
+    ],
+  },
 ];
 
 export function getCourse(slug: string): Course | undefined {

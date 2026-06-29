@@ -2,6 +2,7 @@ import { ansibleInstallation, ansiblePlaybooks, ansibleModules, ansibleRoles, an
 import { k8sPods, k8sDeployments, k8sNetworking, k8sStorage, k8sHelm } from "./kubernetes-lessons";
 import { rhelFilesystem, rhelServices, rhelNetworking, rhelStorage, rhelSecurity } from "./redhat-lessons";
 import { dockerIntro, dockerInstallation, dockerImages, dockerCompose, dockerNetworking, dockerSecurity } from "./docker-lessons";
+import { terraformIntro, terraformInstallation, terraformResources, terraformVariables, terraformModules, terraformState } from "./terraform-lessons";
 
 export interface LessonContent {
   courseSlug: string;
@@ -259,6 +260,13 @@ export const lessonsContent: LessonContent[] = [
   { courseSlug: "docker", lessonSlug: "compose", content: dockerCompose },
   { courseSlug: "docker", lessonSlug: "networking", content: dockerNetworking },
   { courseSlug: "docker", lessonSlug: "security", content: dockerSecurity },
+  // Terraform
+  { courseSlug: "terraform", lessonSlug: "introduction", content: terraformIntro },
+  { courseSlug: "terraform", lessonSlug: "installation", content: terraformInstallation },
+  { courseSlug: "terraform", lessonSlug: "resources", content: terraformResources },
+  { courseSlug: "terraform", lessonSlug: "variables", content: terraformVariables },
+  { courseSlug: "terraform", lessonSlug: "modules", content: terraformModules },
+  { courseSlug: "terraform", lessonSlug: "state", content: terraformState },
 ];
 
 export function getLessonContent(courseSlug: string, lessonSlug: string): LessonContent | undefined {

@@ -21,6 +21,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="fr" suppressHydrationWarning>
       <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#1e40af" />
+        <link rel="apple-touch-icon" href="/icon-192.png" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -30,6 +33,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                   if (dark) document.documentElement.classList.add('dark');
                 } catch(e) {}
               })();
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                  navigator.serviceWorker.register('/sw.js');
+                });
+              }
             `,
           }}
         />
