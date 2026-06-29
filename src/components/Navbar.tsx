@@ -4,6 +4,8 @@ import { useState } from "react";
 import SearchBar from "./SearchBar";
 import DarkModeToggle from "./DarkModeToggle";
 import AuthButton from "./AuthButton";
+import StreakCounter from "./StreakCounter";
+import XPBar from "./XPBar";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,15 +17,18 @@ export default function Navbar() {
             <span className="text-2xl">🚀</span>
             <span className="font-bold text-xl">DevOps Formation</span>
           </Link>
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex items-center space-x-4">
             <SearchBar />
             <Link href="/" className="hover:text-blue-400 transition-colors">Accueil</Link>
             <Link href="/cours" className="hover:text-blue-400 transition-colors">Cours</Link>
-            <Link href="/a-propos" className="hover:text-blue-400 transition-colors">À propos</Link>
+            <Link href="/profil" className="hover:text-blue-400 transition-colors">Profil</Link>
+            <StreakCounter />
+            <XPBar />
             <DarkModeToggle />
             <AuthButton />
           </div>
           <div className="flex md:hidden items-center gap-2">
+            <StreakCounter />
             <DarkModeToggle />
             <button className="p-2" onClick={() => setIsOpen(!isOpen)} aria-label="Menu">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -37,7 +42,7 @@ export default function Navbar() {
         <div className="md:hidden bg-gray-800 px-4 pb-4 space-y-2">
           <Link href="/" className="block py-2 hover:text-blue-400" onClick={() => setIsOpen(false)}>Accueil</Link>
           <Link href="/cours" className="block py-2 hover:text-blue-400" onClick={() => setIsOpen(false)}>Cours</Link>
-          <Link href="/a-propos" className="block py-2 hover:text-blue-400" onClick={() => setIsOpen(false)}>À propos</Link>
+          <Link href="/profil" className="block py-2 hover:text-blue-400" onClick={() => setIsOpen(false)}>Profil</Link>
           <div className="pt-2"><AuthButton /></div>
         </div>
       )}

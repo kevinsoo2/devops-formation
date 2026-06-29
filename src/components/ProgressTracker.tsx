@@ -20,6 +20,19 @@ export default function ProgressTracker({ courseSlug, lessonSlug }: ProgressTrac
     const newValue = !completed;
     localStorage.setItem(key, String(newValue));
     setCompleted(newValue);
+
+    // Award XP when completing a lesson
+    if (newValue) {
+      const currentXP = parseInt(localStorage.getItem("userXP") || "0");
+      localStorage.setItem("userXP", String(currentXP + 50));
+      // Track activity date for streak
+      const dates: string[] = JSON.parse(localStorage.getItem("activityDates") || "[]");
+      const today = new Date().toISOString().split("T")[0];
+      if (!dates.includes(today)) {
+        dates.push(today);
+        localStorage.setItem("activityDates", JSON.stringify(dates));
+      }
+    }
   };
 
   return (

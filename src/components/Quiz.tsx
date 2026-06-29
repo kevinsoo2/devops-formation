@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { QuizQuestion } from "@/lib/quizzes";
+import Confetti from "./Confetti";
 
 interface QuizProps {
   questions: QuizQuestion[];
@@ -45,8 +46,18 @@ export default function Quiz({ questions, courseSlug, lessonSlug }: QuizProps) {
   if (finished) {
     const finalScore = score;
     const percentage = Math.round((finalScore / questions.length) * 100);
+
+    // Award XP
+    if (typeof window !== "undefined") {
+      const currentXP = parseInt(localStorage.getItem("userXP") || "0");
+      let xpGained = 30; // Quiz pass
+      if (percentage === 100) xpGained = 100; // Perfect quiz
+      localStorage.setItem("userXP", String(currentXP + xpGained));
+    }
+
     return (
       <div className="mt-8 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-xl border border-blue-200 dark:border-gray-600">
+        <Confetti trigger={percentage === 100} />
         <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Quiz terminé !</h3>
         <div className="text-center">
           <div className={`text-5xl font-bold mb-2 ${percentage >= 70 ? "text-green-600" : percentage >= 50 ? "text-yellow-600" : "text-red-600"}`}>

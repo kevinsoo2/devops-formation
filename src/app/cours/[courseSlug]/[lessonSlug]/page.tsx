@@ -8,6 +8,8 @@ import ProgressTracker from "@/components/ProgressTracker";
 import ScrollProgress from "@/components/ScrollProgress";
 import TableOfContents from "@/components/TableOfContents";
 import FavoriteButton from "@/components/FavoriteButton";
+import Comments from "@/components/Comments";
+import KeyboardNav from "@/components/KeyboardNav";
 
 export function generateStaticParams() {
   const params: { courseSlug: string; lessonSlug: string }[] = [];
@@ -35,6 +37,10 @@ export default async function LessonPage({ params }: { params: Promise<{ courseS
   return (
     <>
       <ScrollProgress />
+      <KeyboardNav
+        prevUrl={prevLesson ? `/cours/${course.slug}/${prevLesson.slug}` : null}
+        nextUrl={nextLesson ? `/cours/${course.slug}/${nextLesson.slug}` : null}
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative">
         <TableOfContents />
 
@@ -80,6 +86,7 @@ export default async function LessonPage({ params }: { params: Promise<{ courseS
             </div>
           )}
           {quiz && <Quiz questions={quiz.questions} courseSlug={courseSlug} lessonSlug={lessonSlug} />}
+        <Comments courseSlug={courseSlug} lessonSlug={lessonSlug} />
         </div>
 
         {/* Navigation */}
