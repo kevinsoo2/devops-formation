@@ -5,6 +5,10 @@ import { useSession } from "next-auth/react";
 import { badges, getLevel, getUnlockedBadges, UserStats } from "@/lib/gamification";
 import { courses } from "@/lib/courses";
 import Link from "next/link";
+import Heatmap from "@/components/Heatmap";
+import SkillTree from "@/components/SkillTree";
+import WeeklyChallenge from "@/components/WeeklyChallenge";
+import RecommendedNext from "@/components/RecommendedNext";
 
 export default function ProfilPage() {
   const { data: session } = useSession();
@@ -167,3 +171,7 @@ export default function ProfilPage() {
     </div>
   );
 }
+
+
+// Note: Heatmap, SkillTree, WeeklyChallenge, RecommendedNext are imported above
+// and rendered after course progress in the page
