@@ -12,6 +12,8 @@ import Comments from "@/components/Comments";
 import KeyboardNav from "@/components/KeyboardNav";
 import TextToSpeech from "@/components/TextToSpeech";
 import ShareButtons from "@/components/ShareButtons";
+import Notes from "@/components/Notes";
+import ExamMode from "@/components/ExamMode";
 
 export function generateStaticParams() {
   const params: { courseSlug: string; lessonSlug: string }[] = [];
@@ -89,6 +91,8 @@ export default async function LessonPage({ params }: { params: Promise<{ courseS
             </div>
           )}
           {quiz && <Quiz questions={quiz.questions} courseSlug={courseSlug} lessonSlug={lessonSlug} />}
+        {quiz && <ExamMode questions={quiz.questions} courseTitle={course.title} courseSlug={courseSlug} />}
+        <Notes courseSlug={courseSlug} lessonSlug={lessonSlug} />
         <Comments courseSlug={courseSlug} lessonSlug={lessonSlug} />
         </div>
 
