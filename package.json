@@ -9,7 +9,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@auth/drizzle-adapter": "^1.11.2",
     "@libsql/client": "^0.17.4",
     "@tailwindcss/typography": "^0.5.20",
     "drizzle-orm": "^0.45.2",
